@@ -1,0 +1,12 @@
+({
+    doInit : function(component, event, helper) {
+        helper.GetObjectList(component); 
+    },
+    openModel: function(component, event, helper) {
+        component.set("v.isOpen", true);
+        helper.GetFieldList(component,event.target.id); 
+    },
+    closeModel: function(component, event, helper) {
+        component.set("v.isOpen", false);
+    },
+})
