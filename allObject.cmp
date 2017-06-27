@@ -1,8 +1,9 @@
 <aura:component implements="force:appHostable" access="global" controller='allObjectController'>
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <aura:attribute name="Objects" type="sObject[]" />
-    <aura:attribute name="selObjectFields" type="sObject[]" />
-    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/><!-- initialize method that returns all object list -->
+    <aura:attribute name="allObjectDtlLst" type="sObject[]" /> <!-- object that contains all object list-->
+    <aura:attribute name="selObjectFields" type="sObject[]" /> <!-- object that contains all field list --> 
+    <aura:attribute name="isOpen" type="boolean" default="false"/> <!-- variable to maintain popup open close behaviour --> 
+    <!-- all object list grid block starts-->
     <fieldset class="slds-form--compound">
         <div  class="slds-m-bottom--medium" data-reactid="18">
             <h3 style="padding-top: 10px;text-align: center;" class="slds-text-heading--large slds-m-bottom--x-small" data-reactid="19">
@@ -26,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <aura:iteration items="{!v.Objects}" var="obj">
+                    <aura:iteration items="{!v.allObjectDtlLst}" var="obj">
                         <tr class="slds-hint-parent">
                             <td role="gridcell">
                                 {!obj.Name}
@@ -43,9 +44,11 @@
             </table>
         </div>
     </fieldset>
+    <!-- all object list grid block Ends-->
+    <!-- Field List Popup block starts-->
     <aura:if isTrue="{!v.isOpen}">  
         <div role="dialog" style="margin-top: 50px" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
-            <div class="slds-modal__container">
+            <div class="slds-modal__container" style="margin-top: 25px">
                 <div class="slds-modal__header">
                     <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModel}">
                         X
@@ -88,4 +91,5 @@
         </div>
         <div class="slds-backdrop slds-backdrop--open"></div>
     </aura:if>
+    <!-- Field List Popup block Ends-->
 </aura:component>
