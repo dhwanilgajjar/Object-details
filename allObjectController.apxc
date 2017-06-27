@@ -1,5 +1,8 @@
 public class allObjectController {
     @AuraEnabled 
+    /*
+     * Following method returns all the objects detail on the org
+	*/
     public static List<wrapperObject> GetObjectList(){
         List<wrapperObject> ListstdObjectNames = new List<wrapperObject>();
         Map<String, Schema.SObjectType> gd = Schema.getGlobalDescribe();
@@ -12,8 +15,12 @@ public class allObjectController {
         return ListstdObjectNames;
     }
     @AuraEnabled 
+    /*
+     * Following method accepts a string parameter which will be apiName of selected Object
+     * returns all the Field detail of selected object
+	*/
     public static List<wrapperObject> GetFieldList(String objectName){
-        system.debug('objectName:'+objectName);
+        //system.debug('objectName:'+objectName);
         List<wrapperObject> ListFields = new List<wrapperObject>();
         Map <String, Schema.SObjectField> fieldMap = Schema.getGlobalDescribe().get(objectName).getDescribe().fields.getMap();
         for(Schema.SObjectField sfield : fieldMap.Values())
@@ -26,15 +33,19 @@ public class allObjectController {
         }
         return ListFields;
     } 
+    /*
+     * Wrapper Class is Created to load different type of data on component page
+     * wrapper class' object will be helper to load data to grid
+	*/
     public class wrapperObject
     {
         @AuraEnabled
-        public String Name{get;set;}
+        public String Name{get;set;} // It will have object Lable
         @AuraEnabled
-        public String apiName{get;set;}
+        public String apiName{get;set;} // It will have Api Name of Object
         @AuraEnabled
-        public String fieldLable{get;set;}
+        public String fieldLable{get;set;} // It will have Lable of Field
         @AuraEnabled
-        public String fieldType{get;set;}
+        public String fieldType{get;set;}  // Describes which type of field it is. (Ex. BOOLEAN ,Text etc.)
     }
 }
