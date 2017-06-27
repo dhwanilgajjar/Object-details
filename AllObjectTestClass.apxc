@@ -1,0 +1,11 @@
+@isTest
+public class AllObjectTestClass {
+    static testMethod void test1() {
+        allObjectController newObj = new allObjectController(); // object of class which is getting tested in this method
+        allObjectController.wrapperObject wrapObj = new allObjectController.wrapperObject(); //wrapper object to get desired data 
+        List<allObjectController.wrapperObject> lstAllObj= new  List<allObjectController.wrapperObject>(); //it will contain data of all objects
+        lstAllObj= allObjectController.GetObjectList(); // returns all object list
+        wrapObj =lstAllObj.get(0); //getting first element from list of objects 
+        List<allObjectController.wrapperObject> lstSelObjField=allObjectController.GetFieldList(wrapObj.apiName); // calling GetFieldList to get all field Detail
+    }
+}
